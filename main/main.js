@@ -71,3 +71,26 @@ module.exports.updateTask= async (req,res)=>{
         })
 
 }
+
+module.exports.getActiveTasks=(req,res)=>{
+        console.log("here")
+        task.find({isDone: false}).sort({_id:'desc'}).exec((err,docs)=>{
+                if(err){
+                        res.send("Unable to fetch Data")
+                }
+                else{
+                        res.status(200).json(docs)
+                }
+        })
+}
+
+module.exports.getCompletedTasks=(req,res)=>{
+        task.find({isDone: true}).sort({_id:'desc'}).exec((err,docs)=>{
+                if(err){
+                        res.send("Unable to fetch Data")
+                }
+                else{
+                        res.send(docs)
+                }
+        })
+}
