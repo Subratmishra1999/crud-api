@@ -1,8 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var task= Schema({
-        id:Number,
+var mongoose = require("mongoose");
+var taskName=new mongoose.Schema({
+        _id:Number,
         name:String,
-        isDone:Boolean,
+        isDone:Boolean
 });
-module.exports = mongoose.model("task", task);
+module.exports=mongoose.model("task",taskName)
