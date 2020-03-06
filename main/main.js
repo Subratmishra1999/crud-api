@@ -2,8 +2,9 @@ var mongoose=require('mongoose')
 var task=require('../model')
 
 module.exports.insertTask=(req,res)=>{
+ 
         var t=new task();
-        t.name=req.body.value;
+        t.value=req.body.value;
         t._id=req.body._id;
         t.isDone=req.body.isDone;
         t.save()
@@ -58,7 +59,7 @@ module.exports.updateTask= async (req,res)=>{
         
         const response = await task.updateOne({_id : req.params.id}, { isDone : docs.isDone ? false : true },
                 (err,doc)=>{
-                        console.log(a)
+                        
                         if(err){
                                 res.send("Error Occured"+err);
                         }
@@ -73,7 +74,6 @@ module.exports.updateTask= async (req,res)=>{
 }
 
 module.exports.getActiveTasks=(req,res)=>{
-        console.log("here")
         task.find({isDone: false}).sort({_id:'desc'}).exec((err,docs)=>{
                 if(err){
                         res.send("Unable to fetch Data")
